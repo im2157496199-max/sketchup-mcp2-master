@@ -1,0 +1,49 @@
+[project]
+name = "sketchup-mcp2"
+version = "0.3.1"
+description = "Sketchup integration through Model Context Protocol"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE", "NOTICE"]
+authors = [
+    {name = "Alexander V. Zinin", email = "mail@zinin.ru"}
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    # <2: mcp v2 ships breaking changes to the import surface. Floor 1.27 =
+    # фактическая версия из uv.lock. Миграция на v2 — отдельный тикет.
+    "mcp[cli]>=1.27,<2"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+]
+
+[project.urls]
+Homepage = "https://github.com/zinin/sketchup-mcp2"
+Issues = "https://github.com/zinin/sketchup-mcp2/issues"
+Upstream = "https://github.com/mhyrr/sketchup-mcp"
+
+[project.scripts]
+sketchup-mcp2 = "sketchup_mcp.server:main"
+
+[build-system]
+requires = ["setuptools>=77.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
